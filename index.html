@@ -48,9 +48,11 @@ layout: default
       // Send transaction data with a pageview if available
         // when the page loads. Otherwise, use an event when the transaction
         // data becomes available.
+        
         dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-        dataLayer.push({
-            'ecommerce': {
+          dataLayer.push({
+          'event':"purchase",                             //diese Zeile wurde hinzugefügt, dass der Purchase auf Button-Klick funktioniert     
+          'ecommerce': {
               'purchase': {
                 'actionField': {
                   'id': Date.now(),                         // Transaction ID. Required for purchases and refunds. Date.now erstellt einen Zeitstempel als fiktive OrderID
