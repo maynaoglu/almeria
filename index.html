@@ -33,7 +33,7 @@ layout: default
     <div class="flex-container">
     <div><button type="button" onclick=buttonclick() style="height:200px;width:200px" >Button Click Event</button></div>
     <div> <button type="button" onclick=buttonclick() style="height:200px;width:200px" >Page View</button></div>
-    <div> <button type="button" onclick=buttonclick() style="height:200px;width:200px" >EC Event</button></div>
+    <div> <button type="button" onclick=purchase() style="height:200px;width:200px" >EC Event</button></div>
     </div>
   </body>
   <script>
@@ -42,6 +42,46 @@ layout: default
     {
       dataLayer.push({event:"button_click"});
       console.log('button clicked') //das ist nur ein Kommentar in der Konsole damit ich sehe das ausgelöst
+    }
+    var purchase = function()
+    {
+      // Send transaction data with a pageview if available
+        // when the page loads. Otherwise, use an event when the transaction
+        // data becomes available.
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+            'ecommerce': {
+              'purchase': {
+                'actionField': {
+                  'id': Date.now(),                         // Transaction ID. Required for purchases and refunds. Date.now erstellt einen Zeitstempel als fiktive OrderID
+                  'affiliation': 'Online Store',
+                  'revenue': '35.43',                     // Total transaction value (incl. tax and shipping)
+                  'tax':'4.90',
+                  'shipping': '5.99',
+                  'coupon': 'SUMMER_SALE'
+                },
+                'products': [{                            // List of productFieldObjects.
+                  'name': 'Triblend Android T-Shirt',     // Name or ID is required.
+                  'id': '12345',
+                  'price': '15.25',
+                  'brand': 'Google',
+                  'category': 'Apparel',
+                  'variant': 'Gray',
+                  'quantity': 1,
+                  'coupon': ''                            // Optional fields may be omitted or set to empty string.
+                },
+                {
+                  'name': 'Donut Friday Scented T-Shirt',
+                  'id': '67890',
+                  'price': '33.75',
+                  'brand': 'Google',
+                  'category': 'Apparel',
+                  'variant': 'Black',
+                  'quantity': 1
+                }]
+              }
+            }
+          });
     }
 
   </script>
