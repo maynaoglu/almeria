@@ -3,32 +3,53 @@ layout: default
 ---
 
 <html>
-  <head>
+    <head>
         <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KSSF9TZ');</script>
-  <!-- End Google Tag Manager -->
-    <title>
-      secondpage
-    </title>
-  </head>
-  <body>
-    <h1>Hello page 2</h1>
-    <p>This is a test page</p>
-    <p>This was added from visual code</p>
-    <p> <button type="button" onclick=buttonclick()>Klick mich!</button></p>
-  <script>
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-KSSF9TZ');
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <!-- End Google Tag Manager -->
+        <title>secondpage</title>
+    </head>
+    <body>
+        <nav>
+            <a href="pages/about_me.html">About Me</a> | <a href="/css/">CSS</a> | <a href="/js/">JavaScript</a> |
+            <a href="/python/">Python</a>
+        </nav>
+        <h1>Hello page 2</h1>
+        <p>This is a test page</p>
+        <p>This was added from visual code</p>
+        <!-- Add icon library -->
 
-    var buttonclick = function()
-    {
-      dataLayer.push({event:"button_click"});
-      console.log('button clicked') //das ist nur ein Kommentar in der Konsole damit ich sehe das ausgelöst
-    }
+        <div class="card">
+            <img src="img.jpg" alt="John" style="width: 100%" />
+            <h1>John Doe</h1>
+            <p class="title">CEO & Founder, Example</p>
+            <p>Harvard University</p>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <p><button>Contact</button></p>
+        </div>
+        <p><button type="button" onclick="buttonclick()">Klick mich!</button></p>
+        <script>
+            var buttonclick = function () {
+                dataLayer.push({ event: 'button_click' });
+                console.log('button clicked'); //das ist nur ein Kommentar in der Konsole damit ich sehe das ausgelöst
+            };
+        </script>
+    </body>
 
-  </script>
-  </body>
-  
-  <html>
+    <html></html>
+</html>
