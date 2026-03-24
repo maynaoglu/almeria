@@ -4,78 +4,111 @@ layout: default
 
 <html>
   <head>
-        <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KSSF9TZ');</script>
-  <!-- End Google Tag Manager -->
-    <title>
-      Welcome
-    </title>
+      })(window,document,'script','dataLayer','GTM-KSSF9TZ');
+    </script>
+    <!-- End Google Tag Manager -->
+    <title>Welcome</title>
+    <style>
+      .flex-container {
+        display: flex;
+        background-color: DognerBlue; /* korrigiert */
+      }
+      .flex-container > div {
+        margin: 10px;
+        padding: 20px;
+        font-size: 30px;
+      }
+    </style>
   </head>
-  <style>
-    .flex-container {
-      display: flex;
-      background-color: "DognerBLue;"
-    }
-    .flex-container > div {
-      margin: 10px;
-      padding: 20px;
-      font-size: 30px;
-    }
-  </style>
+
   <body>
     <nav>
-       <a href="pages/about_me.html">About Me</a> |
-       <a href="/css/">CSS</a> |
-       <a href="/js/">JavaScript</a> |
-       <a href="/python/">Python</a>
-     </nav>
+      <a href="pages/about_me.html">About Me</a> |
+      <a href="/css/">CSS</a> |
+      <a href="/js/">JavaScript</a> |
+      <a href="/python/">Python</a>
+    </nav>
+
     <h1>Hello</h1>
     <p>This is a test page</p>
+
     <div class="flex-container">
-    <div><button type="button" onclick=buttonclick() style="height:200px;width:200px" >Button Click Event</button></div>
-    <div> <button type="button" onclick=buttonclick() style="height:200px;width:200px" >Page View</button></div>
-    <div> <button type="button" onclick=purchase() style="height:200px;width:200px" >Purchase</button></div>
+      <div>
+        <button type="button" onclick="buttonclick('Button Click Event')" style="height:200px;width:200px">Button Click Event</button>
+      </div>
+      <div>
+        <button type="button" onclick="buttonclick('Page View')" style="height:200px;width:200px">Page View</button>
+      </div>
+      <div>
+        <button type="button" onclick="purchase('Triblend Android T-Shirt', 15.25)" style="height:200px;width:200px">Purchase</button>
+      </div>
     </div>
-  </body>
-  <script>
 
-    var buttonclick = function()
-    {
-      dataLayer.push({event:"button_click"});
-      console.log('button clicked') //das ist nur ein Kommentar in der Konsole damit ich sehe das ausgelöst
-    }
-   var purchase = function() {
-  dataLayer.push({ ecommerce: null });
+    <!-- NEU: Formular-Test -->
+    <form onsubmit="formSubmit(); return false;">
+      <input type="text" placeholder="Name" required>
+      <button type="submit">Submit Form</button>
+    </form>
 
-  dataLayer.push({
-    event: "purchase",
-    ecommerce: {
-      transaction_id: Date.now().toString(),
-      value: 35.43,
-      tax: 4.90,
-      shipping: 5.99,
-      currency: "EUR",
-      coupon: "SUMMER_SALE",
-      items: [
-        {
-          item_name: "Triblend Android T-Shirt",
-          item_id: "12345",
-          price: 15.25,
-          item_brand: "Google",
-          item_category: "Apparel",
-          item_variant: "Gray",
-          quantity: 1
+    <!-- NEU: Zusätzliche Buttons für verschiedene Test-Events -->
+    <button onclick="buttonclick('Green Button')">Green Button</button>
+    <button onclick="buttonclick('Red Button')">Red Button</button>
+    <button onclick="purchase('Hat', 9.99)">Buy Hat</button>
+
+    <script>
+      // NEU: Pageview-Test beim Laden
+      dataLayer.push({ event: "page_view_test" });
+
+      // NEU: Buttonclick mit Namen
+      var buttonclick = function(buttonName) {
+        dataLayer.push({
+          event: "button_click_test",
+          button_name: buttonName
+        });
+        console.log('Button clicked:', buttonName);
+      };
+
+      // NEU: Formularsubmit Event
+      var formSubmit = function() {
+        dataLayer.push({ event: "form_submit_test" });
+        console.log("Form submitted!");
+      };
+
+      // NEU: E-Commerce Purchase Event
+      var purchase = function(productName, value) {
+        dataLayer.push({ ecommerce: null }); // reset
+        dataLayer.push({
+          event: "purchase_test",
+          ecommerce: {
+            transaction_id: Date.now().toString(),
+            value: value,
+            currency: "EUR",
+            items: [
+              {
+                item_name: productName,
+                item_id: "item_" + Math.floor(Math.random()*1000),
+                price: value,
+                quantity: 1
+              }
+            ]
+          }
+        });
+        console.log("Purchase simulated:", productName);
+      };
+
+      // NEU: Scroll-Tracking 50%
+      window.addEventListener('scroll', function() {
+        if ((window.scrollY + window.innerHeight) / document.body.scrollHeight > 0.5) {
+          dataLayer.push({ event: "scroll_50_percent" });
+          console.log("Scrolled 50% of page");
         }
-      ]
-    }
-  });
-}
-
-  </script>
+      }, { once: true });
+    </script>
   </body>
-  
-  <html>
+</html>
